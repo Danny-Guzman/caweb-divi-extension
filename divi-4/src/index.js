@@ -1,7 +1,6 @@
 import $ from 'jquery';
 
-import Divi4Module from './components/divi4-module';
-import Divi4OnlyModule from './components/divi4-only-module';
+import CAWebModuleProfileBanner from './modules/Panel';
 
 /**
  * Register modules to Visual Builder once the API is ready.
@@ -11,7 +10,6 @@ import Divi4OnlyModule from './components/divi4-only-module';
 $(window).on('et_builder_api_ready', (event, API) => {
     // Register modules.
     API.registerModules([
-        Divi4Module,
-        Divi4OnlyModule,
+        CAWebModuleProfileBanner,
     ]);
 });
