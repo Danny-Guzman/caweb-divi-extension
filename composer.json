@@ -1,8 +1,8 @@
 {
-    "name": "divi/d5-extension-example-modules",
+    "name": "caweb/divi-extension-modules",
     "autoload": {
         "psr-4": {
-            "MEE\\Modules\\": "modules/"
+            "CAWeb\\Modules\\": "modules/"
         }
     },
     "require": {}

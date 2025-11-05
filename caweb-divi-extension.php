@@ -33,37 +33,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'CAWEB_DIVI_EXT_DIR', str_replace( '\\', '/', __DIR__ . '/' ) );
 define( 'CAWEB_DIVI_EXT_URL', site_url( preg_replace( '/(.*)\/wp-content/', '/wp-content', CAWEB_DIVI_EXT_DIR ) ) );
 
-/** Divi 4 Actions */
-add_action( 'et_builder_ready', 'caweb_divi_extension_initialize_d4_modules' );
-add_action( 'wp_enqueue_scripts', 'caweb_divi_extension_enqueue_d4_vb_scripts' );
+// Load Divi 4 modules.
+require_once CAWEB_DIVI_EXT_DIR . 'divi-4/divi-4.php';
 
-/**
- * Register all Divi 4 modules.
- *
- * @since ??
- */
-function caweb_divi_extension_initialize_d4_modules() {
-	$caweb_module_files = glob( CAWEB_DIVI_EXT_DIR . '/divi-4/src/modules/*/*.php' );
-
-	foreach ( (array) $caweb_module_files as $caweb_module_file ) {
-		require_once $caweb_module_file;
-	}
-}
-
-/**
- * Enqueue Divi 4 Visual Builder Assets
- *
- * @since ??
- */
-function caweb_divi_extension_enqueue_d4_vb_scripts() {
-	if ( et_core_is_fb_enabled() ) {
-		$plugin_dir_url = plugin_dir_url( __FILE__ );
-		wp_enqueue_script(
-			'caweb-divi4-vb',
-			"{$plugin_dir_url}/build/bundle4.js",
-			array( 'react', 'jquery' ),
-			'1.0.0',
-			true
-		);
-	}
-}
+// Load Divi 5 modules.
+require_once CAWEB_DIVI_EXT_DIR . 'divi-5/divi-5.php';
