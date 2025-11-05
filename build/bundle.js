@@ -1,0 +1,1 @@
+(()=>{"use strict";(0,window.wp.hooks.addAction)("divi.moduleLibrary.registerModuleLibraryStore.after","extensionExample",function(){console.log("Registering Modules")})})();

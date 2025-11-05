@@ -1,5 +1,8 @@
 const path = require('path');
 const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
+const ConversionOutlineJsonPlugin = require('./webpack/config/plugins/conversion-outline-json-plugin');
 
 module.exports = {
     // Webpack starts bundling the assets from the following file.
@@ -9,7 +12,22 @@ module.exports = {
         bundle: './src/index.ts',
     },
 
+    // Determine where the created bundles will be outputted.
+    // @see https://webpack.js.org/concepts/#output
+    output: {
+        filename: '[name].js',
+        clean: true,
+        path: path.resolve(__dirname, 'build'),
+    },
+
     plugins: [
+        // Extract and output CSS into its own file.
+        // @see https://webpack.js.org/plugins/mini-css-extract-plugin/
+        new MiniCssExtractPlugin({
+        filename: '[name].css',
+        }),
+        // Generate conversion-outline.json files from conversion-outline.ts files
+        new ConversionOutlineJsonPlugin(),
         new DependencyExtractionWebpackPlugin()
     ],
     // Divi Visual Builder use of scripts that is already enqueued by WordPress and available
@@ -40,12 +58,17 @@ module.exports = {
     // This option determine how different types of module within the project will be treated.
     // @see https://webpack.js.org/configuration/module/
     module: {
-
         // This option sets up loaders for webpack configuration.
         // Loaders allow webpack to process various types because by default webpack only
         // understand JavaScript and JSON files.
         // @see https://webpack.js.org/concepts/#loaders
         rules: [
+             // Handle `.tsx` and `.ts` files.
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
             // Handle `.jsx` files.
             {
                 test: /\.jsx?$/,
@@ -83,11 +106,47 @@ module.exports = {
                                 // @see https://babeljs.io/docs/en/babel-preset-react
                                 '@babel/preset-react',
                             ],
+                             plugins: [
+                                // Transform class properties syntax.
+                                // @see https://babeljs.io/docs/en/babel-plugin-proposal-class-properties
+                                '@babel/plugin-proposal-class-properties',
+                            ],
                             cacheDirectory: false,
                         },
                     }
                 ]
             },
+
+             // Handle `.css` and `.scss` files.
+            {
+                test: /\.s?css$/i,
+                use: [
+
+                // Loader that enables imported css to be extracted and outputted into its own file.
+                // @see https://webpack.js.org/plugins/mini-css-extract-plugin/#loader-options
+                {
+                    loader: MiniCssExtractPlugin.loader,
+                },
+
+                // Loader that interprets @import and url() like import/require() and resolve them.
+                // @see https://webpack.js.org/loaders/css-loader/
+                {
+                    loader: 'css-loader',
+                    options: {
+                    url: false,
+                    importLoaders: 2,
+                    },
+                },
+
+                // Loader that loads SASS/SCSS and compiles it into CSS
+                // @see https://webpack.js.org/loaders/sass-loader/
+                {
+                    loader: 'sass-loader',
+                    options: {
+                    },
+                },
+                ],
+            }
         ]
     },
 
@@ -96,14 +155,29 @@ module.exports = {
     resolve: {
         // Allows extension to be leave off when importing.
         // @see https://webpack.js.org/configuration/resolve/#resolveextensions
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     },
 
-    // Determine where the created bundles will be outputted.
-    // @see https://webpack.js.org/concepts/#output
-    output: {
-        filename: '[name].js',
-        clean: true,
-        path: path.resolve(__dirname, 'build'),
+    optimization: {
+        // Split CSS code for visual builder and Front-end.
+        // style.scss file will use for front-end.
+        // module.scss or any other *.scss file without style.scss will be used for Front-end.
+        splitChunks: {
+        cacheGroups: {
+            vb: {
+            type: 'css/mini-extract',
+            test: /[\\/]style(\.module)?\.(sc|sa|c)ss$/,
+            chunks: 'all',
+            enforce: true,
+            name( _, chunks, cacheGroupKey ) {
+                const chunkName = chunks[ 0 ].name;
+                return `${ path.dirname(
+                chunkName
+                ) }/${ cacheGroupKey }-${ path.basename( chunkName ) }`;
+            },
+            },
+            default: false,
+        },
+        },
     },
 };

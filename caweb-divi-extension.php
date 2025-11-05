@@ -58,21 +58,23 @@ add_action( 'divi_visual_builder_assets_before_enqueue_scripts', 'caweb_divi_ext
 function caweb_divi_extension_module_enqueue_vb_scripts() {
 	if ( et_builder_d5_enabled() && et_core_is_fb_enabled() ) {
 
-		// \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
-		// 	[
-		// 		'name'   => 'd5-extension-example-modules-builder-bundle-script',
-		// 		'version' => '1.0.0',
-		// 		'script' => [
-		// 			'src' => "{$CAWEB_DIVI_EXT_URL}scripts/bundle.js",
-		// 			'deps'               => [
-		// 				'divi-module-library',
-		// 				'divi-vendor-wp-hooks',
-		// 			],
-		// 			'enqueue_top_window' => false,
-		// 			'enqueue_app_window' => true,
-		// 		],
-		// 	]
-		// );
+		\ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
+			[
+				'name'   => 'caweb-divi-extension-modules-builder-bundle-script',
+				'version' => '1.0.0',
+				'script' => [
+					'src' => CAWEB_DIVI_EXT_URL . "build/bundle.js",
+					'deps'               => [
+						'wp-hooks',
+						'lodash',
+						'divi-vendor-wp-hooks',
+						'divi-module-library',
+					],
+					'enqueue_top_window' => false,
+					'enqueue_app_window' => true,
+				],
+			]
+		);
 
 		// \ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
 		// 	[

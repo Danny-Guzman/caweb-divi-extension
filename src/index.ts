@@ -2,7 +2,7 @@
 
 import { addAction } from '@wordpress/hooks';
 
-import { registerModule } from '@divi/module-library';
+// import { registerModule } from '@divi/module-library';
 
 // import { childModule } from './components/child-module';
 // import { d4Module } from './components/d4-module';
