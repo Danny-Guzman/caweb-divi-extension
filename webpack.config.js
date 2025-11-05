@@ -1,12 +1,17 @@
 const path = require('path');
+const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
 
 module.exports = {
     // Webpack starts bundling the assets from the following file.
     // @see https://webpack.js.org/concepts/#entry
     entry: {
         bundle4: './divi-4/src/index.js',
+        bundle: './src/index.ts',
     },
 
+    plugins: [
+        new DependencyExtractionWebpackPlugin()
+    ],
     // Divi Visual Builder use of scripts that is already enqueued by WordPress and available
     // in global scope so those scripts don't need to be included on the bundle. For webpack
     // to recognize those files, the global variable needs to be registered as externals.
@@ -15,9 +20,21 @@ module.exports = {
     externals: {
         // Third party dependencies.
         underscore: '_',
-        react: 'React',
-        'react-dom': 'ReactDOM',
         jquery: 'jQuery',
+        lodash: 'lodash',
+        // react: ['vendor', 'React'],
+        // 'react-dom': ['vendor', 'ReactDOM'],
+        react: {
+            commonjs: 'React',
+            root: ['vendor', 'React']
+        },
+        'react-dom': {
+            commonjs: 'ReactDOM',
+            root: ['vendor', 'ReactDOM']
+        },
+        
+        // Divi Dependencies.
+        '@divi/module-library': ['divi', 'moduleLibrary'],
     },
 
     // This option determine how different types of module within the project will be treated.
