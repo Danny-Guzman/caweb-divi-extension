@@ -34,6 +34,7 @@ const ModuleEdit = (props: ProfileBannerModuleEditProps): ReactElement => {
     elements,
   } = props;
 
+  console.log( props );
   return (
     <ModuleContainer
       attrs={attrs}
@@ -49,7 +50,10 @@ const ModuleEdit = (props: ProfileBannerModuleEditProps): ReactElement => {
       })}
       <div className="example_d4_module_inner">
         {elements.render({
-          attrName: 'name',
+          attrName: 'title',
+        })}
+        {elements.render({
+          attrName: 'content',
         })}
       </div>
     </ModuleContainer>

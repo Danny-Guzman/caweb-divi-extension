@@ -5,11 +5,7 @@ import {
 } from '@divi/types';
 
 export type ModuleFlatObjectItems = (
-  ModuleFlatObjectNamed<'example/child-module'> |
-  ModuleFlatObjectNamed<'example/d4-module'> |
-  ModuleFlatObjectNamed<'example/dynamic-module'> |
-  ModuleFlatObjectNamed<'example/parent-module'> |
-  ModuleFlatObjectNamed<'example/static-module'>
+  ModuleFlatObjectNamed<'caweb/profile-banner'>
 );
 
 export type ExampleModuleFlatObjects = ModuleFlatObjects<ModuleFlatObjectItems>;

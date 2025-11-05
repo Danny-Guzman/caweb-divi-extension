@@ -44,29 +44,7 @@ export interface ModuleAttrs extends InternalAttrs {
   };
 
   // Fields
-  name?: Element.Types.Title.Attributes;
-  job_title?: Element.Types.Title.Attributes;
-  profile?: {
-      innerContent?: Element.Advanced.Link.Attributes;
-  };
-  portrait?: {
-      innerContent?: Element.Types.Image.InnerContent.Attributes;
-      rounded?: OnOff;
-      vertical?: OnOff;
-  };
-/*
-profile?: {
-    innerContent?: Element.InnerContent.Attributes;
-    decoration?: Element.Decoration.PickedAttributes<'font'>;
-    url?: Element.Advanced.Link.Attributes;
-  };
-
-  portrait?: {
-    innerContent?: Element.InnerContent.Attributes;
-    decoration?: Element.Decoration.PickedAttributes<'font'>;
-    alt?: Element.Types.Title.Attributes;
-  };*/
-
+  title?: Element.Types.Title.Attributes;
 }
 
 export type ProfileBannerModuleEditProps = ModuleEditProps<ModuleAttrs>;

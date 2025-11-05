@@ -51,17 +51,7 @@ export const conversionOutline: ModuleConversionOutline = {
     title:         'css.*.title',
   },
   module: {
-    name:         'name.innerContent.*',
-    job_title:    'job_title.innerContent.*',
-    profile_link: 'profile.innerContent.*',
-    url:          'profile.innerContent.*.value.url',
-    portrait_url: 'portrait.innerContent.*.value.src',
-    portrait_alt: 'portrait.innerContent.*.value.alt',
-    round_image:  'portrait.rounded.*',
-    is_vertical:  'portrait.vertical.*',
-    module_text_shadow_horizontal_length: 'module.advanced.text.textShadow.*.horizontal',
-    module_text_shadow_vertical_length: 'module.advanced.text.textShadow.*.vertical',
-    module_text_shadow_blur_strength: 'module.advanced.text.textShadow.*.blur',
+    title:         'title.innerContent.*',
   },
   valueExpansionFunctionMap: {
   }
