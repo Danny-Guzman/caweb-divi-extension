@@ -14,7 +14,7 @@ class CAWebModuleTest extends Component {
 			<Fragment>
         <div id={moduleID} className={classList}>
           {this.props.title}
-          {this.props.content}
+          {this.props.content()}
         </div>
      </Fragment>
 		);
