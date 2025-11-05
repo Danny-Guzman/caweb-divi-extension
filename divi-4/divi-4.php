@@ -23,12 +23,12 @@ function caweb_divi_extension_initialize_d4_modules() {
  */
 function caweb_divi_extension_enqueue_d4_vb_scripts() {
 	if ( et_core_is_fb_enabled() ) {
-		wp_enqueue_script(
-			'caweb-divi4-vb',
-			CAWEB_DIVI_EXT_URL . "build/bundle4.js",
-			array( 'react', 'jquery' ),
-			'1.0.0',
-			true
-		);
+		// wp_enqueue_script(
+		// 	'caweb-divi4-vb',
+		// 	CAWEB_DIVI_EXT_URL . "build/bundle4.js",
+		// 	array( 'react', 'jquery' ),
+		// 	'1.0.0',
+		// 	true
+		// );
 	}
 }

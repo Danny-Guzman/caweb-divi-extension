@@ -26,9 +26,20 @@ module.exports = {
         new MiniCssExtractPlugin({
         filename: '[name].css',
         }),
+
+         new CopyWebpackPlugin( {
+            patterns: [
+                {
+                from: 'modules/**/*.php',
+                context: 'src',
+                to: path.resolve('.', 'build'),
+                },
+            ]
+            } ),
         // Generate conversion-outline.json files from conversion-outline.ts files
         new ConversionOutlineJsonPlugin(),
     ],
+
     // Divi Visual Builder use of scripts that is already enqueued by WordPress and available
     // in global scope so those scripts don't need to be included on the bundle. For webpack
     // to recognize those files, the global variable needs to be registered as externals.
@@ -47,7 +58,16 @@ module.exports = {
         '@wordpress/hooks': ['vendor', 'wp', 'hooks'],
         
         // Divi Dependencies.
+        '@divi/rest': ['divi', 'rest'],
+        '@divi/data': ['divi', 'data'],
+        '@divi/module': ['divi', 'module'],
+        '@divi/module-utils': ['divi', 'moduleUtils'],
+        '@divi/modal': ['divi', 'modal'],
+        '@divi/field-library': ['divi', 'fieldLibrary'],
+        '@divi/icon-library': ['divi', 'iconLibrary'],
         '@divi/module-library': ['divi', 'moduleLibrary'],
+        '@divi/style-library': ['divi', 'styleLibrary'],
+        '@divi/shortcode-module': ['divi', 'shortcodeModule'],
     },
 
     // This option determine how different types of module within the project will be treated.

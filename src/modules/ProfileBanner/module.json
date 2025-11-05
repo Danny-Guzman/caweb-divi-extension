@@ -1,0 +1,215 @@
+{
+  "name": "caweb/profile-banner",
+  "d4Shortcode": "et_pb_ca_test",
+  "title": "Profile Banner",
+  "titles": "Profile Banners",
+  "moduleIcon": "example/module-d4",
+  "moduleClassName": "et_pb_profile_banner",
+  "moduleOrderClassName": "et_pb_profile_banner",
+  "category": "module",
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "default": {
+        "meta": {
+          "adminLabel": {
+            "desktop": {
+              "value": "D4 Module"
+            }
+          }
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "link": {},
+          "text": {},
+          "htmlAttributes": {}
+        },
+        "decoration": {
+          "background": {},
+          "bodyFont": {},
+          "sizing": {},
+          "spacing": {},
+          "border": {},
+          "boxShadow": {},
+          "filters": {},
+          "transform": {},
+          "animation": {},
+          "overflow": {},
+          "disabledOn": {},
+          "transition": {},
+          "position": {},
+          "zIndex": {},
+          "scroll": {},
+          "sticky": {}
+        }
+      }
+    },
+    "title": {
+      "type": "object",
+      "selector": "{{selector}} .example_d4_module_title",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "headingLevel": "h2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "inlineEditor": "plainText",
+      "elementType": "heading",
+      "childrenSanitizer": "et_core_esc_previously",
+      "attributes": {
+        "class": "example_d4_module_title"
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupName": "mainContent",
+            "priority": 10,
+            "render": true,
+            "attrName": "title.innerContent",
+            "label": "Title",
+            "description": "Input your value to action title here.",
+            "features": {
+              "sticky": false,
+              "dynamicContent": {
+                "type": "text"
+              }
+            },
+            "component": {
+              "name": "divi/text",
+              "type": "field"
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "priority": 10,
+            "component": {
+              "props": {
+                "groupLabel": "Title Text",
+                "fieldLabel": "Title"
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "portrait_alt": {
+      "type": "object",
+      "selector": "{{selector}} .example_d4_module_title",
+      "default": {
+        "decoration": {
+          "font": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "headingLevel": "h2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "inlineEditor": "plainText",
+      "elementType": "heading",
+      "childrenSanitizer": "et_core_esc_previously",
+      "attributes": {
+        "class": "example_d4_module_title"
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupName": "mainContent",
+            "priority": 10,
+            "render": true,
+            "attrName": "portrait_alt.innerContent",
+            "label": "Title",
+            "description": "Input your value to action title here.",
+            "features": {
+              "sticky": false,
+              "dynamicContent": {
+                "type": "text"
+              }
+            },
+            "component": {
+              "name": "divi/text",
+              "type": "field"
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "priority": 10,
+            "component": {
+              "props": {
+                "groupLabel": "Title Text",
+                "fieldLabel": "Title"
+              }
+            }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "selector": "{{selector}} .example_d4_module_content",
+      "attributes": {
+        "class": "example_d4_module_content"
+      },
+      "tagName": "div",
+      "inlineEditor": "richText",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupName": "mainContent",
+            "priority": 20,
+            "render": true,
+            "attrName": "content.innerContent",
+            "label": "Content",
+            "description": "Input the main text content for your module here.",
+            "features": {
+              "sticky": false,
+              "dynamicContent": {
+                "type": "text"
+              }
+            },
+            "component": {
+              "name": "divi/richtext",
+              "type": "field"
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "title": {
+      "subName": "title",
+      "selectorSuffix": " .example_d4_module_title"
+    },
+    "content": {
+      "subName": "content",
+      "selectorSuffix": " .example_d4_module_content"
+    }
+  },
+  "settings": {
+    "content": "auto",
+    "design": "auto",
+    "advanced": "auto"
+  }
+}
