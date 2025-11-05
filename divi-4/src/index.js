@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
-import CAWebModuleProfileBanner from './modules/Panel';
+import CAWebModuleProfileBanner from './modules/ProfileBanner';
+import CAWebModuleTest from './modules/Test';
 
 /**
  * Register modules to Visual Builder once the API is ready.
@@ -11,5 +12,6 @@ $(window).on('et_builder_api_ready', (event, API) => {
     // Register modules.
     API.registerModules([
         CAWebModuleProfileBanner,
+        CAWebModuleTest,
     ]);
 });

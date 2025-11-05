@@ -43,7 +43,11 @@ add_action( 'wp_enqueue_scripts', 'caweb_divi_extension_enqueue_d4_vb_scripts' )
  * @since ??
  */
 function caweb_divi_extension_initialize_d4_modules() {
-	require_once CAWEB_DIVI_EXT_DIR . 'divi-4/src/modules/Panel/Panel.php';
+	$caweb_module_files = glob( CAWEB_DIVI_EXT_DIR . '/divi-4/src/modules/*/*.php' );
+
+	foreach ( (array) $caweb_module_files as $caweb_module_file ) {
+		require_once $caweb_module_file;
+	}
 }
 
 /**

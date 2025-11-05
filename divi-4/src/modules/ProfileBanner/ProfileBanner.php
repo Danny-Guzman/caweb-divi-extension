@@ -5,7 +5,7 @@
  *
  * @since 1.0.0
  */
-class CAWeb_Module_Profile_Banner extends ET_Builder_Module {
+class CAWebModuleProfileBanner extends ET_Builder_Module {
 	// Module slug (also used as shortcode tag)
 	public $slug = 'et_pb_profile_banner';
 
@@ -220,4 +220,4 @@ class CAWeb_Module_Profile_Banner extends ET_Builder_Module {
 	}
 }
 
-new CAWeb_Module_Profile_Banner();
+new CAWebModuleProfileBanner();
