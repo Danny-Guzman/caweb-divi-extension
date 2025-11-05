@@ -67,6 +67,9 @@ function caweb_divi_extension_module_enqueue_vb_scripts() {
 					'deps'               => [
 						'wp-hooks',
 						'lodash',
+						'jquery',
+						'react',
+						'react-dom',
 						'divi-vendor-wp-hooks',
 						'divi-module-library',
 					],

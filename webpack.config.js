@@ -1,5 +1,5 @@
 const path = require('path');
-const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
+// const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
 const ConversionOutlineJsonPlugin = require('./webpack/config/plugins/conversion-outline-json-plugin');
@@ -28,7 +28,6 @@ module.exports = {
         }),
         // Generate conversion-outline.json files from conversion-outline.ts files
         new ConversionOutlineJsonPlugin(),
-        new DependencyExtractionWebpackPlugin()
     ],
     // Divi Visual Builder use of scripts that is already enqueued by WordPress and available
     // in global scope so those scripts don't need to be included on the bundle. For webpack
@@ -40,16 +39,12 @@ module.exports = {
         underscore: '_',
         jquery: 'jQuery',
         lodash: 'lodash',
-        // react: ['vendor', 'React'],
-        // 'react-dom': ['vendor', 'ReactDOM'],
-        react: {
-            commonjs: 'React',
-            root: ['vendor', 'React']
-        },
-        'react-dom': {
-            commonjs: 'ReactDOM',
-            root: ['vendor', 'ReactDOM']
-        },
+        react: 'React',
+        'react-dom': 'ReactDOM',
+
+        // WordPress dependencies.
+        '@wordpress/i18n': ['vendor', 'wp', 'i18n'],
+        '@wordpress/hooks': ['vendor', 'wp', 'hooks'],
         
         // Divi Dependencies.
         '@divi/module-library': ['divi', 'moduleLibrary'],
