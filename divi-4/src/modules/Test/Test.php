@@ -1,11 +1,14 @@
 <?php
 /**
- * Basic Call To Action module (title, content, and button) with NO builder support
- * This module appears as placeholder box on Visual Builder
+ * CAWeb Test Module (Standard)
  *
- * @since 1.0.0
+ * @package CAWeb\Modules\Test
  */
-class CAWebModuleTest extends ET_Builder_Module {
+if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
+	require_once dirname( __DIR__ ) . '/class-caweb-builder-element.php';
+}
+
+class CAWeb_Module_Test extends ET_Builder_CAWeb_Module {
 	// Module slug (also used as shortcode tag)
 	public $slug = 'et_pb_ca_test';
 
@@ -26,31 +29,37 @@ class CAWebModuleTest extends ET_Builder_Module {
 		// $this->icon for using etbuilder font-icon. (See CustomCta / DICM_CTA class)
 		// $this->icon_path = plugin_dir_path( __FILE__ ) . 'icon.svg';
 
-		// Toggle settings
-		// $this->advanced_fields = array(
-		// 	'background' => false,
-		// 	'links'       => false,
-		// );
-		$this->advanced_fields = false;
-		// $this->custom_css_fields = false;
-		// $this->settings_modal_toggles = array(
-		// 	'general'  => array(
-		// 		'toggles' => array(
-		// 			'style'  => esc_html__( 'Style', 'et_builder' ),
-		// 			'header' => esc_html__( 'Header', 'et_builder' ),
-		// 			'body'   => esc_html__( 'Body', 'et_builder' ),
-		// 		),
-		// 	),
-		// 	'advanced' => array(
-		// 		'toggles' => array(
-		// 			'body' => esc_html__( 'Body', 'et_builder' ),
-		// 			'text'  => array(
-		// 				'title'    => et_builder_i18n( 'Text' ),
-		// 				'priority' => 49,
-		// 			),
-		// 		),
-		// 	),
-		// );
+		/**
+		 * Settings Modals do not make sense
+		 * @see https://www.elegantthemes.com/documentation/developers/divi-module/advanced-field-types-for-module-settings/
+		 * 
+		 * tab_slug: References are mixed up (shrug)
+		 *    general - Content Tab of the Module Settings Modal
+		 *    advanced - Design Tab of the Module Settings Modal
+		 *    custom_css - Advanced Tab of the Module Settings Modal
+		 *
+		 * toggle_slug: see https://www.elegantthemes.com/documentation/developers/divi-module/module-settings-groups/
+		 * @since Divi 4.27.4
+		 */
+
+		// Toggle Design Settings
+		// Some properties are added automatically by Divi
+		// You can disable all advanced design settings by setting this property to false.
+		// $this->advanced_fields = false;
+		$this->advanced_fields = array(
+			'background' 	 => false,
+			'border'     	 => false,
+			'box_shadow' 	 => false,
+			'button'   		 => false,
+			'filters'	 	 => false,
+			'fonts'       	 => false,
+			'margin_padding' => false,
+			'max_width'		 => false,
+			'text'       	 => false,
+			'animation'    	 => false,
+			'position'    	 => false,
+		);
+
 	}
 
 	/**
@@ -112,4 +121,4 @@ class CAWebModuleTest extends ET_Builder_Module {
 	}
 }
 
-new CAWebModuleTest();
+new CAWeb_Module_Test();

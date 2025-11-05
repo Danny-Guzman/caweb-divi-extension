@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-import CAWebModuleProfileBanner from './modules/ProfileBanner';
-import CAWebModuleTest from './modules/Test';
+import CAWebModuleProfileBanner from './modules/profile-banner';
+import CAWebModuleTest from './modules/test';
 
 /**
  * Register modules to Visual Builder once the API is ready.

@@ -1,8 +1,9 @@
 // External Dependencies
 import React, { Component, Fragment } from 'react';
 
+import  CAWeb_Component from '../component.jsx';
 
-class CAWebModuleProfileBanner extends Component {
+class CAWebModuleProfileBanner extends CAWeb_Component {
   static slug = 'et_pb_profile_banner';
 
   render() {

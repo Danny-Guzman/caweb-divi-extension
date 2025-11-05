@@ -1,11 +1,15 @@
 <?php
 /**
- * Basic Call To Action module (title, content, and button) with NO builder support
- * This module appears as placeholder box on Visual Builder
+ * CAWeb Profile Banner Module (Standard)
  *
- * @since 1.0.0
+ * @package CAWeb\Modules\ProfileBanner
  */
-class CAWebModuleProfileBanner extends ET_Builder_Module {
+
+if ( ! class_exists( 'ET_Builder_CAWeb_Module' ) ) {
+	require_once dirname( __DIR__ ) . '/class-caweb-builder-element.php';
+}
+
+class CAWeb_Module_Profile_Banner extends ET_Builder_Module {
 	// Module slug (also used as shortcode tag)
 	public $slug = 'et_pb_profile_banner';
 
@@ -220,4 +224,4 @@ class CAWebModuleProfileBanner extends ET_Builder_Module {
 	}
 }
 
-new CAWebModuleProfileBanner();
+new CAWeb_Module_Profile_Banner();

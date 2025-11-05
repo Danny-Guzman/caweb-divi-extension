@@ -1,8 +1,9 @@
 // External Dependencies
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 
+import  CAWeb_Component from '../component.jsx';
 
-class CAWebModuleTest extends Component {
+class CAWebModuleTest extends CAWeb_Component {
   static slug = 'et_pb_ca_test';
 
   render() {
