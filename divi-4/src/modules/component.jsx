@@ -9,7 +9,7 @@ class CAWeb_Component extends Component {
 	
 	constructor(props) {
 		super(props);
-		this.caweb_google_maps_embed_api_key = 'AIzaSyCtq3i8ME-Ab_slI2D8te0Uh2PuAQVqZuE';
+		this.caweb_google_maps_embed_api_key = '';
 		this.icon_list = [
 			"logo",
 			"home",
