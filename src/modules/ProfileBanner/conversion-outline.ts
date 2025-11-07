@@ -52,8 +52,8 @@ export const conversionOutline: ModuleConversionOutline = {
   },
   module: {
     name:         'name.innerContent.*',
-    job_title:    'job_title.innerContent.*',
-    profile_link: 'profile.innerContent.*',
+    job_title:    'job.innerContent.*',
+    profile_link: 'profile.text.*',
     url:          'profile.innerContent.*.value.url',
     portrait_url: 'portrait.innerContent.*.value.src',
     portrait_alt: 'portrait.innerContent.*.value.alt',

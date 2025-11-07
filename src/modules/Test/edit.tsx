@@ -34,7 +34,6 @@ const ModuleEdit = (props: ProfileBannerModuleEditProps): ReactElement => {
     elements,
   } = props;
 
-  console.log( props );
   return (
     <ModuleContainer
       attrs={attrs}

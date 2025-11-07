@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // phpcs:disable ET.Sniffs.ValidVariableName.UsedPropertyNotSnakeCase -- WP use snakeCase in \WP_Block_Parser_Block
 
 use ET\Builder\Packages\Module\Module;
+use ET\Builder\Packages\ModuleUtils\ModuleUtils;
 use ET\Builder\Framework\Utility\HTMLUtility;
 use ET\Builder\FrontEnd\BlockParser\BlockParserStore;
 use ET\Builder\Packages\Module\Options\Element\ElementComponents;
@@ -36,71 +37,110 @@ trait RenderCallbackTrait {
 	 * @return string HTML rendered of ProfileBanner module.
 	 */
 	public static function render_callback( $attrs, $content, $block, $elements ) {
+		// Portrait.
+		$portrait = ModuleUtils::get_attr_value(array(
+			'attr' => $attrs['portrait']['innerContent'] ?? $attrs,
+			'breakpoint' => 'desktop',
+			'state' => 'value',
+			'mode' => 'getAndInheritAll',
+		));
+
+		$portraitAdvanced = ModuleUtils::get_attr_value(array(
+			'attr' => $attrs['portrait']['advanced'] ?? $attrs,
+			'breakpoint' => 'desktop',
+			'state' => 'value',
+			'mode' => 'getAndInheritAll',
+		));
+
+		$isVertical = isset($portraitAdvanced['vertical']) && "on" === $portraitAdvanced['vertical'];
+		$isRounded = isset($portraitAdvanced['rounded']) && "on" === $portraitAdvanced['rounded'];
+
+		$portrait = HTMLUtility::render(array(
+			'tag' => 'img',
+			'attributes' => array(
+				'class' => array(
+					'width-80',
+					'height-80',
+					$isVertical ? 'align-self-center' : 'me-3',
+					$isRounded ? 'rounded-circle' : '',
+				),
+				'src' => $portrait['src'] ?? '',
+				isset( $portrait['alt'] ) ? 'alt' : '' => $portrait['alt'] ?? '',
+			),
+		));
 		
-		// Background component.
-		$background_component = ElementComponents::component(
-			[
-				'attrs'         => $attrs['module']['decoration'] ?? [],
-				'id'            => $block->parsed_block['id'],
+		$profile = ModuleUtils::get_attr_value(array(
+			'attr' => $attrs['profile']['innerContent'],
+			'breakpoint' => 'desktop',
+			'state' => 'value',
+			'mode' => 'getAndInheritAll',
+		));
+		
+		$body = HTMLUtility::render(array(
+			'tag' => 'div',
+			'childrenSanitizer' => 'et_core_esc_previously',
+			'attributes' => array(
+				'class' => array(
+					'body',
+					$isVertical ? 'text-center' : '',
+				),
+			),
+			'children' => array(
+				$elements->render( [ 'attrName' => 'name', 'class' => 'ok' ] ),
+				$elements->render( [ 'attrName' => 'job' ] ),
+				isset( $profile['url'], $profile['text'] ) ?
+					HTMLUtility::render(array(
+						'tag' => 'a',
+						'attributes' => array(
+							'href' => esc_url( $profile['url'] ),
+						),
+						'children' => esc_html( $profile['text'] ),
+					)) : '',
+			),
+		));
 
-				// FE only.
-				'orderIndex'    => $block->parsed_block['orderIndex'],
-				'storeInstance' => $block->parsed_block['storeInstance'],
-			]
-		);
-
-		// Title.
-		$title = $elements->render(
-			[
-				'attrName' => 'title',
-			]
-		);
-
-		// Content.
-		$content = $elements->render(
-			[
-				'attrName'          => 'content',
-				'childrenSanitizer' => 'et_core_esc_previously',
-			]
-		);
-
-		$inner_content = HTMLUtility::render(
-			[
-				'tag'               => 'div',
-				'attributes'        => [
-					'class' => 'example_d4_module_inner',
-				],
-				'childrenSanitizer' => 'et_core_esc_previously',
-				'children'          => [
-					$title,
-					$content,
-				],
-			]
-		);
+		$inner_content = HTMLUtility::render(array(
+			'tag'               => 'figure',
+			'attributes'        => array(
+				'class' => array(
+					'executive-profile',
+					'p-3',
+					'd-flex',
+					$isVertical ? 'flex-column bg-light vertical' : 'flex-row'
+				),
+			),
+			'childrenSanitizer' => 'et_core_esc_previously',
+			'children'          => array(
+					$portrait,
+					$body
+				),
+			));
 
 		$parent       = BlockParserStore::get_parent( $block->parsed_block['id'], $block->parsed_block['storeInstance'] );
 		$parent_attrs = $parent->attrs ?? [];
 
-		return Module::render(
-			[
+		return Module::render(array(
 				// FE only.
 				'orderIndex'          => $block->parsed_block['orderIndex'],
 				'storeInstance'       => $block->parsed_block['storeInstance'],
 
 				// VB equivalent.
 				'id'                  => $block->parsed_block['id'],
-				'name'                => $block->block_type->name,
 				'moduleCategory'      => $block->block_type->category,
+				'name'                => $block->block_type->name,
 				'attrs'               => $attrs,
 				'elements'            => $elements,
+				'children'            =>  $inner_content,
+
 				'classnamesFunction'  => [ self::class, 'module_classnames' ],
 				'stylesComponent'     => [ self::class, 'module_styles' ],
 				'scriptDataComponent' => [ self::class, 'module_script_data' ],
+
+				// parent attrs
 				'parentAttrs'         => $parent_attrs,
 				'parentId'            => $parent->id ?? '',
 				'parentName'          => $parent->blockName ?? '',
-				'children'            => $background_component . $inner_content,
-			]
-		);
+		));
+		
 	}
 }

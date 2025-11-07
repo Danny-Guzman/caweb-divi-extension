@@ -13,21 +13,11 @@ export const placeholderContent: ModuleAttrs = {
       },
     }
   },
-  job_title: {
+  job: {
     innerContent: {
       desktop: {
-        value: 'placeholder.job_title',
+        value: 'placeholder.job',
       },
     }
-  },
-  profile: {
-    innerContent: {
-      desktop: {
-        value: {
-          url: 'placeholder.profile',
-          target: 'on',
-        }
-      },
-    }
-  },
+  }
 };
