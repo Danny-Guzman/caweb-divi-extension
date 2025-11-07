@@ -1,10 +1,10 @@
 /* eslint-disable class-methods-use-this */
-const jscodeshift = require("jscodeshift");
-const fs = require("fs");
-const fsp = fs.promises;
-const path = require("path");
-const glob = require("glob");
-const extractStaticProperties = require("./extract-static-properties");
+import jscodeshift from "jscodeshift";
+import fs from "fs";
+import fsp from "fs/promises";
+import path from "path";
+import glob from "glob";
+import extractStaticProperties from "./extract-static-properties.js";
 
 /**
  * Webpack plugin that generates a `conversion-outline.json` file from `conversion-outline.ts` files.
@@ -99,4 +99,4 @@ class ConversionOutlineJsonPlugin {
   }
 }
 
-module.exports = ConversionOutlineJsonPlugin;
+export default ConversionOutlineJsonPlugin;
